@@ -1,0 +1,1 @@
+/* Word masters - Wordle clone js file */
