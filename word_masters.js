@@ -3,6 +3,12 @@ const GET_WORD_URL = "https://words.dev-apis.com/word-of-the-day"
 const VALIDATE_WORD_URL = "https://words.dev-apis.com/validate-word"
 const wordsEl = document.querySelectorAll('.word')
 
+/* Object describing the current cursor position */
+let currentCursorPosition = { currentWordIndex:  0, currentWordPosition: 0 }
+
+/* Word of the day */
+let wordOfTheDay;
+
 /* Checking if user input is right */
 function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter);
@@ -21,6 +27,11 @@ async function getWordOfTheDay() {
 }
 
 /* Keypress handling */
+function enableKeypressHandling() {
+    document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener('keydown', handleBackSpaceAndEnter);
+}
+
 function handleKeyPress(event) {
     let keyName = event.key;
 
@@ -32,21 +43,26 @@ function handleKeyPress(event) {
     console.log(keyName);
 }
 
-function handleBackSpace(event) {
+function handleBackSpaceAndEnter(event) {
     let keyName = event.key;
 
-    if (keyName != 'Backspace') {
-        return;
+    switch(keyName) {
+        case "Backspace":
+            console.log("You got backspace babe");
+            break;
+        case "Enter":
+            console.log("You got enter babe");
+            break;
+        default:
+            return;
     }
-    console.log("Got the backspace babe");
 }
 
 /* Main Function */
 async function init() {
-    const wordOfTheDay = await getWordOfTheDay();
+    wordOfTheDay = await getWordOfTheDay();
 
-    document.addEventListener('keypress', handleKeyPress);
-    document.addEventListener('keydown', handleBackSpace);
+    enableKeypressHandling();
 }
 
 init();
