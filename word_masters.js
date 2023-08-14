@@ -23,7 +23,7 @@ async function getWordOfTheDay() {
   try {
     const promise = await fetch(GET_WORD_URL);
     const processedResponse = await promise.json();
-    return processedResponse.word;
+    return processedResponse.word.toUpperCase();
   } catch {
     alert(`Couldn't get the word of the day from ${GET_WORD_URL} API :/`);
     console.error("Error:", error);
@@ -117,13 +117,14 @@ async function handleEnter() {
 
   const result = await isWordValid();
 
-  console.log(result);
-
   if (!result) {
     handleWrongResult();
-
     return;
   }
+
+  console.log(result);
+
+  handleRightResult();
 
   loadingSymbol.classList.add('loading-off');
 }
@@ -137,6 +138,53 @@ function handleWrongResult() {
       wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.remove('red-border');
     }, 1000)
   }
+}
+
+function handleRightResult() {
+  console.log("Right result handling below xd:");
+  console.log(wordOfTheDay);
+  let howMuchAnsweredRight = 0;
+  let yellowGuesses = "";
+
+  for (let i = 0; i < currentUserWord.length; i++) {
+    if (currentUserWord[i] === wordOfTheDay[i]) {
+      howMuchAnsweredRight++;
+      wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('green-letter');
+    } else {
+      if (wordOfTheDay.includes(currentUserWord[i])) {
+        if (!yellowGuesses.includes(currentUserWord[i])) {
+          wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('orange-letter');
+        } else {
+          wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('gray-letter');
+        }
+      } else {
+        wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('gray-letter');
+        yellowGuesses += currentUserWord[i];
+      }
+    }
+  }
+
+  currentUserWord = '';
+
+  if (howMuchAnsweredRight == 5) {
+    win();
+  } else {
+    currentCursorPosition.currentWordIndex++;
+    currentCursorPosition.currentWordPosition = 0;
+    if (currentCursorPosition.currentWordIndex == 6) {
+      lose();
+    }
+  }
+}
+
+function win() {
+  console.log("winning procedure");
+  alert('you win');
+}
+
+function lose() {
+  console.log("losing procedure");
+  alert(`you lose, the word was ${wordOfTheDay}`);
 }
 
 /* Main Function */

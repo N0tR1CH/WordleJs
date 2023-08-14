@@ -48,6 +48,21 @@ body {
   border: 3px solid #cccccc;
 }
 
+.green-letter {
+  background-color: green;
+  color: #fefefe;
+}
+
+.gray-letter {
+  background-color: gray;
+  color: #fefefe;
+}
+
+.orange-letter {
+  background-color: orange;
+  color: #fefefe;
+}
+
 .red-letter {
   animation: red-border-animation 1.5s infinite linear;
 }
