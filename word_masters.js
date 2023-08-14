@@ -69,10 +69,6 @@ function handleKeyPress(event) {
   ].innerText = keyName;
 
   currentUserWord += keyName;
-
-  console.log(keyName);
-  console.log(currentCursorPosition);
-  console.log(currentUserWord);
 }
 
 function handleBackSpaceAndEnter(event) {
@@ -83,7 +79,6 @@ function handleBackSpaceAndEnter(event) {
       handleBackSpace();
       break;
     case "Enter":
-      console.log("You got enter babe");
       if (currentCursorPosition.currentWordPosition != 5) {
         return;
       }
@@ -104,8 +99,6 @@ function handleBackSpace() {
   ].innerText = '';
 
   currentUserWord = currentUserWord.slice(0, -1);
-
-  console.log(currentCursorPosition.currentWordPosition);
 }
 
 async function handleEnter() {
@@ -121,8 +114,6 @@ async function handleEnter() {
     handleWrongResult();
     return;
   }
-
-  console.log(result);
 
   handleRightResult();
 
@@ -141,8 +132,6 @@ function handleWrongResult() {
 }
 
 function handleRightResult() {
-  console.log("Right result handling below xd:");
-  console.log(wordOfTheDay);
   let howMuchAnsweredRight = 0;
   let yellowGuesses = "";
 
@@ -178,12 +167,11 @@ function handleRightResult() {
 }
 
 function win() {
-  console.log("winning procedure");
+  document.querySelector('.game-title').classList.add('rainbow-text');
   alert('you win');
 }
 
 function lose() {
-  console.log("losing procedure");
   alert(`you lose, the word was ${wordOfTheDay}`);
 }
 
