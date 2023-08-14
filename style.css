@@ -1,49 +1,87 @@
 /* Always do before any project */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'REM', sans-serif;
-    background-color: #ffffff;
-    text-align: center;
+  font-family: "REM", sans-serif;
+  background-color: #ffffff;
+  text-align: center;
 }
 
 .game-container {
-    width: 320px;
-    margin: auto;
+  width: 320px;
+  margin: auto;
 }
 
 .game-title {
-    font-size: 28px;
-    margin: 32px 0px;
-    color: #333333;
+  font-size: 28px;
+  margin: 32px 0px;
+  color: #333333;
 }
 
 .line-break {
-    background-color: #333333;
-    height: 3px;
+  background-color: #333333;
+  height: 3px;
 }
 
 .words {
-    display: flex;
-    flex-direction: column;
-    margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
 }
 
 .word {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 20px;
-    margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 20px;
+  margin-bottom: 12px;
 }
 
 .letter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
-    font-size: 36px;
-    border: 3px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 36px;
+  border: 3px solid #cccccc;
+}
+
+.red-letter {
+  animation: red-border-animation 1.5s infinite linear;
+}
+
+.loading-symbol {
+  font-size: 48px;
+  position: absolute;
+  left: 928px;
+  bottom: 790px;
+  animation: spin 1.5s infinite linear;
+}
+
+.loading-off {
+  display: none;
+}
+
+.red-border {
+  animation: red-border-animation 1.5s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes red-border-animation {
+  0% {
+    border-color: red;
+  }
+  50% {
+    border-color: #cccccc;
+  }
+  100% {
+    border-color: #cccccc;
+  }
 }
