@@ -143,12 +143,12 @@ function handleRightResult() {
       if (wordOfTheDay.includes(currentUserWord[i])) {
         if (!yellowGuesses.includes(currentUserWord[i])) {
           wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('orange-letter');
+          yellowGuesses += currentUserWord[i];
         } else {
           wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('gray-letter');
         }
       } else {
         wordsEl[currentCursorPosition.currentWordIndex].children[i].classList.add('gray-letter');
-        yellowGuesses += currentUserWord[i];
       }
     }
   }
